@@ -948,7 +948,7 @@ class QueryBuilder
         $fromClauses = array();
         $joinsPending = true;
         $joinAliases = array();
-        
+
         // Loop through all FROM clauses
         foreach ($this->sqlParts['from'] as $from) {
             $fromClause = $from['table'] . ' ' . $from['alias'];
@@ -964,7 +964,7 @@ class QueryBuilder
                 }
                 $joinsPending = false;
             }
-            
+
             $fromClauses[$from['alias']] = $fromClause;
         }
 
@@ -975,7 +975,7 @@ class QueryBuilder
                 throw QueryException::unknownAlias($fromAlias, array_keys($knownAliases));
             }
         }
-        
+
         $query .= implode(', ', $fromClauses)
                 . ($this->sqlParts['where'] !== null ? ' WHERE ' . ((string) $this->sqlParts['where']) : '')
                 . ($this->sqlParts['groupBy'] ? ' GROUP BY ' . implode(', ', $this->sqlParts['groupBy']) : '')
@@ -1087,8 +1087,7 @@ class QueryBuilder
      */
     public function createPositionalParameter($value, $type = \PDO::PARAM_STR)
     {
-        $this->boundCounter++;
-        $this->setParameter($this->boundCounter, $value, $type);
+        $this->setParameter($this->boundCounter++, $value, $type);
         return "?";
     }
 }

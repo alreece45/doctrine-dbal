@@ -546,7 +546,7 @@ class QueryBuilderTest extends \Doctrine\Tests\DbalTestCase
         );
 
         $this->assertEquals('SELECT u.* FROM users u WHERE u.name = ?', (string)$qb);
-        $this->assertEquals(10, $qb->getParameter(1));
+        $this->assertEquals(10, $qb->getParameter(0));
     }
 
     /**
